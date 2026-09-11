@@ -30,3 +30,14 @@ Static deployment works immediately: upload/push the project to GitHub and impor
 
 ## Images
 The product cards currently use CSS-generated placeholders so the project works without external image dependencies. Replace the mock artwork with your selected Unsplash images when adding products.
+
+
+## Logo
+Place your own logo at `assets/logo.png`. The homepage hero and customer trust card use that file.
+
+## Home visual updates
+- Explore Deals changed to Why Us?
+- Added Why Us section matching the supplied reference layout while retaining Fluxcord's amber theme.
+- Category cards now use the supplied image URLs.
+- Hero uses `assets/logo.png` instead of the moving yellow circle.
+- Customer reviews use a continuous right-to-left marquee loop.
