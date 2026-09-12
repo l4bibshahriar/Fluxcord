@@ -1,1 +1,36 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Login — Fluxcord</title><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Sans:wght@600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"></head><body><main class="auth"><div class="auth-card"><a class="logo" href="index.html">FLUX<span>CORD</span></a><h1>Welcome Back</h1><p>Log in to your Fluxcord account.</p><form onsubmit="demoAuth(event,'login')"><input type="email" placeholder="Email Address" required><input type="password" placeholder="Password" required><button class="btn full">🔒 Log In</button></form><small>Don't have an account? <a href="register.html">Create one →</a></small></div></main><script src="js/app.js"></script></body></html>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Login — Fluxcord</title><link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=IBM+Plex+Sans:wght@600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="css/style.css"></head><body><main class="auth"><div class="auth-card"><a class="logo" href="index.html">FLUX<span>CORD</span></a><h1>Welcome Back</h1><p>Log in to your Fluxcord account.</p><form onsubmit="demoAuth(event,'login')"><input type="email" placeholder="Email Address" required><input type="password" placeholder="Password" required><button class="btn full">🔒 Log In</button></form><small>Don't have an account? <a href="register.html">Create one →</a></small></div></main><script src="js/app.js"></script>
+<footer class="site-footer">
+  <div class="container footer-grid">
+    <div class="footer-brand">
+      <a class="logo" href="index.html">FLUX<span>CORD</span></a>
+      <p>Premium digital resources for creators, builders and modern online communities.</p>
+      <small>© <span class="footer-year">2026</span> Fluxcord. All rights reserved.</small>
+    </div>
+    <div class="footer-column">
+      <h3>Social Media</h3>
+      <a href="https://discord.com/" target="_blank" rel="noopener" aria-label="Discord"><span class="social-icon">◈</span> Discord</a>
+      <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><span class="social-icon">f</span> Facebook</a>
+      <a href="https://www.youtube.com/" target="_blank" rel="noopener" aria-label="YouTube"><span class="social-icon">▶</span> YouTube</a>
+      <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><span class="social-icon">◎</span> Instagram</a>
+      <a href="https://www.tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok"><span class="social-icon">♪</span> TikTok</a>
+    </div>
+    <div class="footer-column">
+      <h3>Resources</h3>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </div>
+    <div class="footer-column">
+      <h3>Library</h3>
+      <a href="shop.html">Products</a>
+      <a href="account.html">Accounts</a>
+      <a href="shop.html?cat=AI%20Master%20Prompts">AI Master Prompts</a>
+      <a href="shop.html?cat=E-Books">E-Books</a>
+      <a href="shop.html?cat=Discord%20Bots">Discord Bots</a>
+      <a href="shop.html?cat=Telegram%20Bots">Telegram Bots</a>
+      <a href="shop.html?cat=Pre-Made%20Websites">Pre-Made Websites</a>
+      <a href="shop.html?cat=Games">Games</a>
+    </div>
+  </div>
+</footer>
+<script>document.querySelectorAll('.footer-year').forEach(e=>e.textContent=new Date().getFullYear());</script>
+</body></html>

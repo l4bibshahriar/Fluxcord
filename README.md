@@ -41,3 +41,11 @@ Place your own logo at `assets/logo.png`. The homepage hero and customer trust c
 - Category cards now use the supplied image URLs.
 - Hero uses `assets/logo.png` instead of the moving yellow circle.
 - Customer reviews use a continuous right-to-left marquee loop.
+
+
+## Final visual update
+- Why Fluxcord now contains exactly two feature boxes: “From payment to delivery” on the left and a long “Trusted by our customers” stats box on the right.
+- Category cards use responsive auto-fit columns and 16:9 image thumbnails.
+- Added professional black footer with Social Media, Resources and Library columns.
+- Added `terms.html` and `privacy.html`.
+- Social links currently point to the main platform pages; replace them with Fluxcord's exact profile URLs when available.
