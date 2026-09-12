@@ -52,3 +52,22 @@
 
 .legal-page{max-width:900px}.legal-updated{color:var(--text2);font-size:12px;margin:-12px 0 35px}.legal-content{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:32px 35px}.legal-content h2{font:800 20px var(--font-head);margin:0 0 8px;padding-top:16px}.legal-content h2:first-child{padding-top:0}.legal-content p{color:var(--text2);font-size:13px;line-height:1.8;margin:0 0 22px}.legal-content a{color:var(--accent)}
 @media(max-width:600px){.legal-content{padding:23px 20px}.legal-content h2{font-size:18px}}
+
+
+/* Fluxcord category + price-range fix */
+.image-category{padding:0;position:relative;display:block;aspect-ratio:16/9;min-height:0;overflow:hidden;background:#121722}
+.image-category .category-thumb{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;z-index:0}
+.image-category .category-thumb img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.image-category .category-info{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:38px 14px 13px;display:block;background:linear-gradient(180deg,transparent 0%,rgba(4,6,9,.18) 25%,rgba(4,6,9,.92) 100%)}
+.image-category .category-info strong{display:block;font-size:13px;line-height:1.25;color:#f2f2f5;text-shadow:0 1px 10px rgba(0,0,0,.7)}
+.image-category .category-info small{display:none!important}
+.category-grid{grid-template-columns:repeat(7,minmax(0,1fr));gap:14px}
+.price-range{position:relative;display:grid;gap:7px;margin-top:4px}
+.price-range input{padding:0!important;background:transparent!important;border:0!important;height:18px;accent-color:var(--accent);cursor:pointer}
+.price-range input:first-child{margin-bottom:-12px}
+.price-values{display:flex;align-items:center;justify-content:space-between;color:var(--accent);font-weight:700;font-size:12px;margin-top:7px}
+.price-values span{color:var(--text2);font-weight:400}
+@media(max-width:1200px){.category-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:900px){.category-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){.category-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.image-category .category-info{padding:32px 10px 10px}.image-category .category-info strong{font-size:11px}}
+@media(max-width:430px){.category-grid{grid-template-columns:1fr 1fr}.image-category .category-info strong{font-size:10px}}
