@@ -49,3 +49,10 @@ Place your own logo at `assets/logo.png`. The homepage hero and customer trust c
 - Added professional black footer with Social Media, Resources and Library columns.
 - Added `terms.html` and `privacy.html`.
 - Social links currently point to the main platform pages; replace them with Fluxcord's exact profile URLs when available.
+
+
+## Latest UI fixes
+- Category cards are true 16:9 cards with the supplied banner images filling the entire card.
+- Category item counts are hidden.
+- Shop filter now uses a $0.00–$100.00 price range with minimum and maximum handles.
+- Price filtering and Clear All are wired to the new range controls.
