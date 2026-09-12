@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/checkout/:orderid", "destination": "/checkout.html?order=:orderid" },
+    { "source": "/:category/:product", "destination": "/product.html?category=:category&product=:product" }
+  ]
+}

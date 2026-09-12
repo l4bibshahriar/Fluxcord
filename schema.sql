@@ -282,3 +282,38 @@ $$;
 
 revoke all on function public.create_order(jsonb,text,text,text) from public;
 grant execute on function public.create_order(jsonb,text,text,text) to authenticated;
+
+-- Fluxcord v2 order/admin enhancements
+alter table public.profiles add column if not exists balance numeric(12,2) not null default 0 check (balance >= 0);
+alter table public.profiles add column if not exists total_spend numeric(12,2) not null default 0 check (total_spend >= 0);
+alter table public.reviews alter column user_id drop not null;
+alter table public.reviews add column if not exists reviewer_name text;
+alter table public.orders add column if not exists payment_sender text;
+drop policy if exists "reviews_insert_admin" on public.reviews;
+create policy "reviews_insert_admin" on public.reviews for insert to authenticated with check (public.is_admin());
+create or replace function public.sync_profile_total_spend() returns trigger language plpgsql security definer set search_path=public as $$
+begin update public.profiles p set total_spend=coalesce((select sum(o.total) from public.orders o where o.user_id=p.id and o.status='delivered'),0) where p.id in (new.user_id,coalesce(old.user_id,new.user_id)); return coalesce(new,old); end; $$;
+drop trigger if exists sync_profile_total_spend on public.orders;
+create trigger sync_profile_total_spend after insert or update of status,total,user_id or delete on public.orders for each row execute function public.sync_profile_total_spend();
+create or replace function public.create_order(p_items jsonb,p_payment_method text,p_payment_reference text default null,p_customer_note text default null,p_payment_sender text default null) returns uuid language plpgsql security definer set search_path=public as $$
+declare v_user uuid:=auth.uid();v_order uuid;v_subtotal numeric(12,2):=0;v_item jsonb;v_product public.products%rowtype;v_qty integer;
+begin
+if v_user is null then raise exception 'You must be signed in.'; end if;
+if jsonb_typeof(p_items)<>'array' or jsonb_array_length(p_items)=0 then raise exception 'Cart is empty.'; end if;
+for v_item in select * from jsonb_array_elements(p_items) loop v_qty:=greatest(1,least(99,coalesce((v_item->>'quantity')::integer,1)));select * into v_product from public.products where id=(v_item->>'product_id')::uuid and is_active=true;if not found then raise exception 'One or more products are unavailable.';end if;v_subtotal:=v_subtotal+(v_product.price*v_qty);end loop;
+insert into public.orders(user_id,status,payment_status,payment_method,payment_reference,payment_sender,subtotal,total,currency,customer_note) values(v_user,'pending','unpaid',trim(p_payment_method),nullif(trim(p_payment_reference),''),nullif(trim(p_payment_sender),''),v_subtotal,v_subtotal,'USD',nullif(trim(p_customer_note),'')) returning id into v_order;
+for v_item in select * from jsonb_array_elements(p_items) loop v_qty:=greatest(1,least(99,coalesce((v_item->>'quantity')::integer,1)));select * into v_product from public.products where id=(v_item->>'product_id')::uuid and is_active=true;insert into public.order_items(order_id,product_id,product_title,unit_price,quantity,line_total,download_url) values(v_order,v_product.id,v_product.title,v_product.price,v_qty,v_product.price*v_qty,v_product.download_url);end loop;
+return v_order;end; $$;
+revoke all on function public.create_order(jsonb,text,text,text,text) from public;grant execute on function public.create_order(jsonb,text,text,text,text) to authenticated;
+
+-- Customer payment submission: only the owner can attach sender/transaction details to their own order.
+create or replace function public.submit_payment(p_order_id uuid,p_payment_sender text,p_payment_reference text)
+returns void language plpgsql security definer set search_path=public as $$
+begin
+  if auth.uid() is null then raise exception 'You must be signed in.'; end if;
+  if coalesce(trim(p_payment_sender),'')='' or coalesce(trim(p_payment_reference),'')='' then raise exception 'Sender and transaction ID are required.'; end if;
+  update public.orders set payment_sender=trim(p_payment_sender),payment_reference=trim(p_payment_reference),payment_status='submitted',status='under_review' where id=p_order_id and user_id=auth.uid() and status='pending';
+  if not found then raise exception 'Order cannot be updated.'; end if;
+end; $$;
+revoke all on function public.submit_payment(uuid,text,text) from public;
+grant execute on function public.submit_payment(uuid,text,text) to authenticated;

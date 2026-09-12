@@ -67,3 +67,14 @@ Add these Vercel Environment Variables:
 `SUPABASE_SECRET_KEY` and `RESEND_API_KEY` are server-only. Never use `NEXT_PUBLIC_` for either of them.
 
 Keep Supabase Auth email confirmation enabled. Verify your sending domain in Resend and use a From address on that verified domain.
+
+## V2 changes
+- Supabase Auth client explicitly persists sessions in localStorage.
+- Login has only Forgot Email + Send me sign in link; email actions confirm before sending.
+- Product cards have Add to Cart + Buy Now.
+- Product URLs use /{category}/{product-slug} and Vercel rewrites to product.html.
+- Order flow uses /checkout/{orderid}.
+- Admin can deliver/cancel orders, send customer emails, manage reviews, and edit customer balance/total spend.
+- Payment destinations live in js/payments.js.
+- Run the updated schema.sql in Supabase SQL Editor after the previous schema. It adds payment_sender, customer balance/spend, and admin/fake-review support.
+- Set Supabase Auth URL configuration Site URL to https://fluxcord.store and add https://fluxcord.store/** to Redirect URLs.
