@@ -48,7 +48,7 @@ async function main(req,res){
     if(action==='register'){
       const password=String(body.password||''),first=String(body.firstName||'').trim(),last=String(body.lastName||'').trim();
       if(password.length<6) return json(res,400,{error:'Password must be at least 6 characters.'});
-      const link=await generateAuthLink({type:'signup',email,password,data:{full_name:`${first} ${last}`.trim(),name:`${first} ${last}`.trim()},redirectTo:`${siteUrl()}/login.html`});
+      const link=await generateAuthLink({type:'signup',email,password,data:{full_name:`${first} ${last}`.trim(),name:`${first} ${last}`.trim()},redirectTo:`${siteUrl()}/account.html`});
       const url=link?.properties?.action_link||link?.action_link;
       if(!url) throw new Error('Supabase did not return a confirmation link.');
       const name=first||email.split('@')[0];
