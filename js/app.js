@@ -1,6 +1,6 @@
 /* Fluxcord — Supabase-powered frontend */
 const SUPABASE_CDN = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2';
-let supabase = null;
+let supabaseClient = null;
 let dbProducts = [];
 let configLoaded = false;
 
@@ -28,16 +28,24 @@ function saveCart(c){localStorage.setItem('fluxcord_cart',JSON.stringify(c));upd
 function updateCartCount(){let n=Object.values(getCart()).reduce((a,b)=>a+Number(b||0),0);$all('#cartCount').forEach(e=>e.textContent=n)}
 function normalizeProduct(p){return {id:p.id,title:p.title||p.name||'Untitled',name:p.title||p.name||'Untitled',category:p.category||p.cat||'Others',cat:p.category||p.cat||'Others',price:Number(p.price||0),currency:p.currency||'USD',image_url:p.image_url||'',description:p.description||'',download_url:p.download_url||'',is_active:p.is_active!==false,featured:!!p.featured,rating:Number(p.rating||5),badge:p.badge||'NEW',tag:p.tag||((p.category||p.cat||'DIGITAL').toUpperCase())}}
 async function loadSupabase(){
-  if(configLoaded)return supabase;
+  if(configLoaded)return supabaseClient;
   configLoaded=true;
   try{
-    const r=await fetch('/api/config.js',{cache:'no-store'});
+    const r=await fetch('/api/config',{cache:'no-store'});
     if(!r.ok)throw new Error('Config endpoint unavailable');
     const cfg=await r.json();
     if(!cfg.url||!cfg.key)throw new Error('Supabase environment variables are missing in Vercel.');
-    if(!window.supabase)await new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=SUPABASE_CDN;s.onload=resolve;s.onerror=()=>reject(new Error('Could not load Supabase client'));document.head.appendChild(s)});
-    supabase=window.supabase.createClient(cfg.url,cfg.key);
-    return supabase;
+    if(!window.supabase || typeof window.supabase.createClient !== 'function') await new Promise((resolve,reject)=>{
+      const s=document.createElement('script');
+      s.src=SUPABASE_CDN;
+      s.async=false;
+      s.onload=()=> (window.supabase && typeof window.supabase.createClient==='function') ? resolve() : reject(new Error('Supabase client loaded but createClient is unavailable'));
+      s.onerror=()=>reject(new Error('Could not load Supabase client'));
+      document.head.appendChild(s);
+    });
+    if(!window.supabase || typeof window.supabase.createClient !== 'function') throw new Error('Supabase client is unavailable.');
+    supabaseClient=window.supabase.createClient(cfg.url,cfg.key);
+    return supabaseClient;
   }catch(e){console.error(e);toast(e.message||'Supabase could not be initialized.','error');return null}
 }
 async function initProducts(){
