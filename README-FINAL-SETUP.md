@@ -31,3 +31,39 @@ Never put `SUPABASE_SERVICE_ROLE_KEY` / secret keys in this project or in browse
 The website uses `/api/config` to expose only the public Supabase URL and publishable/anon key to the static frontend. No Supabase secret key is exposed.
 
 Checkout uses the `create_order` database function so the browser cannot choose its own product price.
+
+## Custom Fluxcord Email System (Vercel + Resend)
+
+This build does NOT use Supabase's SMTP sender for the main signup, recovery, or magic-link emails. Vercel Functions generate the Supabase Auth links server-side and send them through Resend.
+
+Required Vercel environment variables:
+- NEXT_PUBLIC_SUPABASE_URL
+- NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+- SUPABASE_URL
+- SUPABASE_SECRET_KEY
+- RESEND_API_KEY
+- RESEND_FROM_EMAIL
+- SITE_URL
+
+Keep SUPABASE_SECRET_KEY and RESEND_API_KEY server-only. Never prefix either with NEXT_PUBLIC_ and never put them in browser JavaScript.
+
+Supabase Auth > Email > Confirm email should remain enabled. The custom server function creates the Auth link and Resend delivers it.
+
+For Resend, verify fluxcord.store (or another sending domain) and use a From address on that verified domain.
+
+## Custom Email System (Vercel + Resend)
+
+This build sends the main Fluxcord authentication emails from Vercel Functions through Resend instead of relying on Supabase's SMTP sender. Vercel Functions generate the Supabase Auth action link server-side; the Supabase secret key is never sent to the browser.
+
+Add these Vercel Environment Variables:
+- NEXT_PUBLIC_SUPABASE_URL
+- NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY
+- SUPABASE_URL
+- SUPABASE_SECRET_KEY
+- RESEND_API_KEY
+- RESEND_FROM_EMAIL
+- SITE_URL
+
+`SUPABASE_SECRET_KEY` and `RESEND_API_KEY` are server-only. Never use `NEXT_PUBLIC_` for either of them.
+
+Keep Supabase Auth email confirmation enabled. Verify your sending domain in Resend and use a From address on that verified domain.
