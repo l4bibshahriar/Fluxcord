@@ -34,7 +34,6 @@
       </div>
 
       <div class="nav-actions">
-        <button class="lang-btn"><i class="icon-globe-2"></i> বাংলা <i class="icon-chevron-down"></i></button>
         <a class="btn btn-small btn-outline" href="https://discord.gg/9EpdA3KpQE" target="_blank" rel="noopener">
           Get Access
         </a>
@@ -147,11 +146,12 @@
           <div class="chart-head">
             <div>
               <div class="mini-label">AI WORKFORCE SIGNAL</div>
-              <h3>কর্মী চাহিদা বনাম AI চাহিদার সংকেত</h3>
+              <h3>বাংলাদেশে কর্মসংস্থান বনাম AI চাহিদার প্রবণতা</h3>
             </div>
             <div class="chart-legend">
-              <span><b class="legend-dot dot-a"></b> কর্মী চাহিদা</span>
+              <span><b class="legend-dot dot-a"></b> কর্মসংস্থান ঝুঁকি</span>
               <span><b class="legend-dot dot-b"></b> AI চাহিদা</span>
+              <span><b class="legend-dot dot-c"></b> বেকারত্ব সূচক</span>
             </div>
           </div>
           <div class="chart-wrap" id="chart">
@@ -167,16 +167,21 @@
                 <line x1="70" y1="230" x2="950" y2="230"/><line x1="70" y1="310" x2="950" y2="310"/>
                 <line x1="70" y1="390" x2="950" y2="390"/>
               </g>
-              <path class="area" d="M70,350 L215,365 L360,260 L505,205 L650,250 L795,320 L940,100 L940,390 L70,390 Z"/>
-              <polyline class="line line-a" points="70,350 215,365 360,260 505,205 650,250 795,320 940,100"/>
-              <polyline class="line line-b" points="70,375 215,370 360,320 505,210 650,125 795,95 940,70"/>
+              <path class="area" d="M70,350 L215,365 L360,315 L505,250 L650,210 L795,150 L940,105 L940,390 L70,390 Z"/>
+              <polyline class="line line-a" points="70,350 215,365 360,315 505,250 650,210 795,150 940,105"/>
+              <polyline class="line line-b" points="70,375 215,365 360,320 505,260 650,195 795,125 940,70"/>
+              <polyline class="line line-c" points="70,295 215,280 360,260 505,240 650,215 795,190 940,170"/>
               <g class="points-a">
-                <circle cx="70" cy="350" r="6"/><circle cx="215" cy="365" r="6"/><circle cx="360" cy="260" r="6"/>
-                <circle cx="505" cy="205" r="6"/><circle cx="650" cy="250" r="6"/><circle cx="795" cy="320" r="6"/><circle cx="940" cy="100" r="6"/>
+                <circle cx="70" cy="350" r="6"/><circle cx="215" cy="365" r="6"/><circle cx="360" cy="315" r="6"/>
+                <circle cx="505" cy="250" r="6"/><circle cx="650" cy="210" r="6"/><circle cx="795" cy="150" r="6"/><circle cx="940" cy="105" r="6"/>
               </g>
               <g class="points-b">
-                <circle cx="70" cy="375" r="6"/><circle cx="215" cy="370" r="6"/><circle cx="360" cy="320" r="6"/>
-                <circle cx="505" cy="210" r="6"/><circle cx="650" cy="125" r="6"/><circle cx="795" cy="95" r="6"/><circle cx="940" cy="70" r="6"/>
+                <circle cx="70" cy="375" r="6"/><circle cx="215" cy="365" r="6"/><circle cx="360" cy="320" r="6"/>
+                <circle cx="505" cy="260" r="6"/><circle cx="650" cy="195" r="6"/><circle cx="795" cy="125" r="6"/><circle cx="940" cy="70" r="6"/>
+              </g>
+              <g class="points-c">
+                <circle cx="70" cy="295" r="5"/><circle cx="215" cy="280" r="5"/><circle cx="360" cy="260" r="5"/>
+                <circle cx="505" cy="240" r="5"/><circle cx="650" cy="215" r="5"/><circle cx="795" cy="190" r="5"/><circle cx="940" cy="170" r="5"/>
               </g>
             </svg>
             <div class="chart-labels">
@@ -185,10 +190,11 @@
             <div class="chart-tooltip" id="chartTooltip">
               <b id="tipYear">২০২৬</b>
               <span>কর্মী চাহিদা <strong id="tipA">130K+</strong></span>
-              <span>AI চাহিদা <strong id="tipB">Saturation</strong></span>
+              <span>AI চাহিদা <strong id="tipB">92</strong></span>
+              <span>বেকারত্ব সূচক <strong id="tipC">74</strong></span>
             </div>
           </div>
-          <p class="tiny-note">নোট: এই ভিজ্যুয়ালটি একটি illustrative marketing graphic; এটি কোনো নির্দিষ্ট সরকারি/বাজার-গবেষণা সিরিজ নয়।</p>
+          <p class="tiny-note">নোট: ২০২০–২০২৬ মানগুলো একটি indexed illustrative trend—বাংলাদেশের নির্দিষ্ট সরকারি “AI-জনিত ছাঁটাই” সিরিজ নয়। বাস্তব প্রচারে যাচাইকৃত উৎসের ডেটা ব্যবহার করুন।</p>
         </div>
       </div>
     </section>
@@ -364,14 +370,12 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
-
 <!-- Discount Popup -->
 <div id="discountPopup" class="discount-popup" aria-hidden="true">
   <div class="discount-overlay"></div>
   <div class="discount-card">
     <button id="discountClose" class="discount-close" aria-label="বন্ধ করুন">×</button>
-    <div class="confetti" aria-hidden="true"></div>
+    <div class="confetti" aria-hidden="true"></div><div class="confetti-pieces" aria-hidden="true"></div>
     <span class="discount-kicker">🎉 বিশেষ অফার</span>
     <h2>অভিনন্দন! আপনি ডিসকাউন্ট পেয়েছেন!</h2>
     <p>Fluxcord AI Mastery Course এখন সম্পূর্ণ কোর্সের জন্য বিশেষ মূল্যে।</p>
@@ -383,6 +387,10 @@
     <button id="discountAccess" class="discount-access">এখনই Get Access করুন →</button>
   </div>
 </div>
+
+  <script src="script.js"></script>
+
+
 
 </body>
 </html>
