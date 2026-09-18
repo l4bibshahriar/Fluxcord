@@ -349,3 +349,94 @@ body.popup-open{overflow:hidden}
 @keyframes pricePop{from{transform:scale(.45);opacity:0}to{transform:scale(1);opacity:1}}
 @keyframes toastIn{from{opacity:0;transform:translate(-50%,12px)}to{opacity:1;transform:translate(-50%,0)}}
 @media(max-width:700px){.chart-legend{justify-content:flex-start;gap:10px}.discount-card{padding:46px 20px 24px}.new-price{font-size:50px}.redirect-toast{max-width:calc(100vw - 28px);white-space:normal;text-align:center}}
+
+
+/* ===== Fluxcord 7-Day V2 ===== */
+.about-video-card{display:grid;grid-template-columns:1.08fr .92fr;gap:0;border:1px solid var(--white-line);border-radius:28px;overflow:hidden;background:linear-gradient(145deg,rgba(18,18,16,.94),rgba(8,8,8,.98));box-shadow:var(--shadow)}
+.youtube-frame{position:relative;min-height:420px;background:#000;overflow:hidden}
+.youtube-frame:after{content:"";position:absolute;inset:0;pointer-events:none;box-shadow:inset 0 0 90px rgba(245,197,27,.06)}
+.youtube-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.about-copy{padding:52px;display:flex;flex-direction:column;justify-content:center}
+.about-copy h3{font-size:34px;margin:13px 0}
+.about-copy p{color:#918e86;line-height:2;margin:0 0 24px}
+.about-points{display:grid;gap:10px;margin:0 0 28px;color:#b7b2a7;font-size:13px}
+.about-points span::first-letter{color:var(--gold)}
+.module-list{display:grid;gap:9px;margin:30px 0}
+.module-list div{display:grid;grid-template-columns:46px 1fr;gap:13px;align-items:center;border:1px solid var(--white-line);border-radius:14px;padding:13px 14px;background:#0b0b0a;color:#aaa69d;font-size:13px;line-height:1.55;transition:transform .2s ease,border-color .2s ease,background .2s ease}
+.module-list div:hover{transform:translateX(4px);border-color:rgba(245,197,27,.3);background:#0e0e0c}
+.module-list b{display:grid;place-items:center;width:35px;height:35px;border-radius:10px;color:#0b0b09;background:var(--gold);font-size:11px}
+.course-top .badge{white-space:nowrap}
+.price-block{text-align:right}
+.price-block .price{display:block;color:var(--gold);font-size:42px;font-weight:900}
+.price-block .price small{display:block;color:#77746d;font-size:12px;font-weight:700;margin-top:2px}
+.discount-popup{transition:opacity .1s ease,visibility .1s ease}
+.discount-card{transform:scale(.68);opacity:.2;transition:transform .1s cubic-bezier(.2,1.3,.3,1),opacity .1s ease}
+.discount-popup.show .discount-card{transform:scale(1);opacity:1}
+.old-price{font-size:18px;color:#777;text-decoration:line-through}
+.new-price{display:block}
+
+@media(max-width:1000px){
+ .about-video-card{grid-template-columns:1fr}
+ .youtube-frame{min-height:360px}
+ .about-copy{padding:38px}
+ .hero{min-height:auto;padding-top:55px;padding-bottom:55px}
+ .hero-grid{gap:42px}
+}
+@media(max-width:700px){
+ body{font-size:14px}
+ .container{width:calc(100% - 24px)}
+ .nav-wrap{top:7px;padding-bottom:6px}
+ .nav{margin-top:7px;padding:0 12px;border-radius:17px}
+ .brand{font-size:14px}
+ .brand-mark{width:27px;height:27px}
+ .nav-actions .btn{font-size:11px;padding:9px 10px}
+ .hero{padding-top:38px;padding-bottom:48px}
+ .hero-grid{gap:28px}
+ .hero h1{font-size:clamp(39px,12vw,54px);line-height:1.04}
+ .hero-desc{font-size:14px;line-height:1.85}
+ .hero-actions .btn{width:100%}
+ .terminal-card{border-radius:20px}
+ .terminal-top{height:52px;padding:0 13px;font-size:11px}
+ .terminal-body{padding:24px 17px;font-size:10px}
+ .terminal-panel{padding:18px;border-radius:17px}
+ .section{padding:72px 0}
+ .section-tight{padding-top:60px}
+ .section-heading{margin-bottom:25px}
+ .section-heading h2{font-size:34px}
+ .section-heading.split{gap:22px}
+ .about-video-card{border-radius:20px}
+ .youtube-frame{min-height:220px}
+ .about-copy{padding:25px}
+ .about-copy h3{font-size:27px}
+ .about-copy p{font-size:13px;line-height:1.85}
+ .chart-card{padding:20px 15px 16px;border-radius:20px}
+ .chart-head{align-items:flex-start;flex-direction:column;gap:15px}
+ .chart-head h3{font-size:20px;line-height:1.45}
+ .chart-legend{justify-content:flex-start;gap:9px;font-size:10px}
+ .chart-wrap{padding:10px 8px 0;overflow:hidden}
+ .chart-wrap svg{height:235px;min-width:560px}
+ .chart-labels{font-size:9px;min-width:560px}
+ .chart-tooltip{width:135px;padding:10px 11px}
+ .course-card{border-radius:20px}
+ .course-main,.course-side{padding:23px 18px}
+ .course-top{flex-direction:column;gap:13px}
+ .course-top h3{font-size:25px;line-height:1.35}
+ .course-top .badge{white-space:normal;align-self:flex-start}
+ .module-list{margin:22px 0}
+ .module-list div{grid-template-columns:38px 1fr;padding:11px;font-size:11px}
+ .module-list b{width:30px;height:30px}
+ .price-block{text-align:left}
+ .price-block .price{font-size:37px}
+ .bonus-row span{font-size:10px}
+ .cert-grid{gap:45px}
+ .certificate{min-height:320px;padding:27px;border-radius:20px}
+ .certificate h3{font-size:32px;margin-top:85px}
+ .cert-copy h2{font-size:42px}
+ .footer-grid{grid-template-columns:1fr;gap:25px}
+ .footer-grid>div:first-child{grid-column:auto}
+ .discount-card{width:calc(100vw - 24px);padding:42px 18px 20px;border-radius:21px}
+ .discount-card h2{font-size:25px}
+ .discount-card p{font-size:13px;line-height:1.65}
+ .new-price{font-size:52px}
+ .redirect-toast{max-width:calc(100vw - 24px);white-space:normal;text-align:center}
+}
